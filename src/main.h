@@ -10,10 +10,15 @@ int bytes_per_row;
 int HEIGHT = PBL_IF_RECT_ELSE(168,180);
 int WIDTH = PBL_IF_RECT_ELSE(144,180);
 
+int IMAGE_HEIGHT = 76;
+int IMAGE_WIDTH = 56;
+
 void draw(Layer *layer, GContext *ctx){
 	graphics_context_set_compositing_mode(ctx, GCompOpSet);
-	graphics_draw_bitmap_in_rect(ctx, old_image, GRect((WIDTH-28)/2, 30, 28, 38));
-	graphics_draw_bitmap_in_rect(ctx, image, GRect((WIDTH-28)/2, HEIGHT-30-38, 28, 38));
+	graphics_draw_bitmap_in_rect(ctx, old_image, GRect((WIDTH-IMAGE_WIDTH)/2, 4, IMAGE_WIDTH, IMAGE_HEIGHT));
+	graphics_draw_bitmap_in_rect(ctx, image, GRect((WIDTH-IMAGE_WIDTH)/2, HEIGHT-4-IMAGE_HEIGHT, IMAGE_WIDTH, IMAGE_HEIGHT));
+	graphics_context_set_stroke_color(ctx, GColorBlack);
+	graphics_draw_line(ctx, GPoint(0,HEIGHT/2), GPoint(WIDTH,HEIGHT/2));
 }
 
 GColor get_pixel_color(int x, int y){
@@ -38,8 +43,8 @@ void handle_init(){
 	bitmap_data = gbitmap_get_data(image);
 	bytes_per_row = gbitmap_get_bytes_per_row(image);
 	
-	replace_colors(28, 38, GColorRed, GColorBlue);
-	replace_colors(28, 38, GColorDarkCandyAppleRed, GColorOxfordBlue);
+	replace_colors(56, 76, GColorRed, GColorBlue);
+	replace_colors(56, 76, GColorDarkCandyAppleRed, GColorOxfordBlue);
 	
 	window_stack_push(window, true);
 	
@@ -50,9 +55,9 @@ void handle_init(){
 
 /*
 // A functionally-correct answer
-void replace_colors(int num_columns, int num_rows, GColor old_color, GColor new_color){
-	int max_y = num_rows;
-	int max_x = num_columns;
+void replace_colors(int pixel_width, int pixel_height, GColor old_color, GColor new_color){
+	int max_y = pixel_height; //Use 14 for just the hat
+	int max_x = pixel_width;
 	
 	for(int y = 0; y < max_y; y++){
 		for(int x = 0; x < max_x; x++){
