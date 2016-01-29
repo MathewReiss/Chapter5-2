@@ -21,7 +21,7 @@
 * - new_color: the color you are replacing old_color with
 */
 void replace_colors(int pixel_width, int pixel_height, GColor old_color, GColor new_color){
-	int max_y = pixel_height;
+	int max_y = pixel_height/2;
 	int max_x = pixel_width;
 	
 	for(int y = 0; y < max_y; y++){

@@ -56,7 +56,7 @@ void handle_init(){
 /*
 // A functionally-correct answer
 void replace_colors(int pixel_width, int pixel_height, GColor old_color, GColor new_color){
-	int max_y = pixel_height; //Use 14 for just the hat
+	int max_y = pixel_height; //Use 28 for just the hat
 	int max_x = pixel_width;
 	
 	for(int y = 0; y < max_y; y++){
